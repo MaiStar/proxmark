@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Запуск
+#./proxmark_commands.sh
+
 # Путь к файлу для сохранения результатов
 output_file=~/Музыка/output.txt
 
