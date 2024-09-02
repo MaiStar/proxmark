@@ -28,7 +28,6 @@ def analyze_file(filename):
             if current_cluster is not None:
                 clusters[current_cluster][result] += 1
 
-    # Добавляем кластер "all"
     all_totals = {"хорошая": 0, "нет записи": 0, "мусор": 0, "не получилось": 0}
     for cluster in clusters.values():
         for key in all_totals:
@@ -44,7 +43,7 @@ def plot_results(clusters):
     junk = [clusters[c]["мусор"] / sum(clusters[c].values()) * 100 for c in cluster_names]
     failed = [clusters[c]["не получилось"] / sum(clusters[c].values()) * 100 for c in cluster_names]
 
-    plt.figure(figsize=(10, 6))
+    plt.figure("Тест ключей", figsize=(10, 6))
     plt.barh(cluster_names, good, color='green', label='хорошая')
     plt.barh(cluster_names, no_data, color='blue', left=good, label='нет записи')
     plt.barh(cluster_names, junk, color='red', left=[i+j for i, j in zip(good, no_data)], label='мусор')
@@ -64,9 +63,17 @@ def write_results_to_file(clusters, output_filename):
                 file.write(f"  {key}: {value}\n")
             file.write("\n")
 
+def print_results(clusters):
+    for cluster, data in clusters.items():
+        print(f"Кластер {cluster}:")
+        for key, value in data.items():
+            print(f"  {key}: {value}")
+        print()
+
 if __name__ == "__main__":
     filename = "output.txt"
     output_filename = "results.txt"
     clusters = analyze_file(filename)
     plot_results(clusters)
     write_results_to_file(clusters, output_filename)
+    print_results(clusters)
