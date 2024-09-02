@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Запуск
-#./proxmark_commands.sh
-
 # Путь к файлу для сохранения результатов
 output_file=~/Музыка/output.txt
 
@@ -13,12 +10,15 @@ output_file=~/Музыка/output.txt
 ./pm3 -c "hf mf wrbl --blk 8 -k 59D7FD628402 -d 00000000000000000000000000000000"
 
 # Цикл от 200 до 2000 с шагом 50
-for delay in $(seq 1700 10 1700); do
-#for delay in $(seq 200 50 2000); do
-  # Пишем задержку в файл
-  echo "$delay" >> $output_file
+for delay in $(seq 200 50 2000); do
+  # Получаем текущее время в формате ЧЧ:ММ:СС
+  current_time=$(date +"%H:%M:%S")
   
-  # Выполняем команду и записываем результат 10 раз
+  # Пишем задержку и текущее время в файл
+  echo "$delay" >> $output_file
+  echo "$current_time" >> $output_file
+  
+  # Выполняем команду и записываем результат 40 раз
   for i in {1..40}; do
     # Выполняем команду hw tearoff с текущей задержкой
     ./pm3 -c "hw tearoff --delay $delay --on"
@@ -33,4 +33,3 @@ for delay in $(seq 1700 10 1700); do
     echo "$result" >> $output_file
   done
 done
-
