@@ -36,6 +36,10 @@ def analyze_file(filename):
 
     return clusters
 
+def calculate_percentages(cluster_data):
+    total = sum(cluster_data.values())
+    return {key: (value / total * 100) if total > 0 else 0 for key, value in cluster_data.items()}
+
 def plot_results(clusters):
     cluster_names = list(clusters.keys())
     good = [clusters[c]["хорошая"] / sum(clusters[c].values()) * 100 for c in cluster_names]
@@ -58,16 +62,18 @@ def plot_results(clusters):
 def write_results_to_file(clusters, output_filename):
     with open(output_filename, 'w') as file:
         for cluster, data in clusters.items():
+            percentages = calculate_percentages(data)
             file.write(f"Кластер {cluster}:\n")
             for key, value in data.items():
-                file.write(f"  {key}: {value}\n")
+                file.write(f"  {key}: {value} ({percentages[key]:.2f}%)\n")
             file.write("\n")
 
 def print_results(clusters):
     for cluster, data in clusters.items():
+        percentages = calculate_percentages(data)
         print(f"Кластер {cluster}:")
         for key, value in data.items():
-            print(f"  {key}: {value}")
+            print(f"  {key}: {value} ({percentages[key]:.2f}%)")
         print()
 
 if __name__ == "__main__":
