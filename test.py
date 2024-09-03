@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 def analyze_line(line):
     if "00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F" in line:
@@ -59,7 +60,11 @@ def plot_results(clusters):
     plt.legend()
     plt.show()
 
-def write_results_to_file(clusters, output_filename):
+def write_results_to_file(clusters, base_filename):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    cluster_range = f"{min(clusters.keys())}-{max(clusters.keys())}"
+    output_filename = f"{base_filename}_{timestamp}_{cluster_range}.txt"
+
     with open(output_filename, 'w') as file:
         for cluster, data in clusters.items():
             percentages = calculate_percentages(data)
@@ -78,8 +83,8 @@ def print_results(clusters):
 
 if __name__ == "__main__":
     filename = "output.txt"
-    output_filename = "results.txt"
+    base_filename = "results"
     clusters = analyze_file(filename)
     plot_results(clusters)
-    write_results_to_file(clusters, output_filename)
+    write_results_to_file(clusters, base_filename)
     print_results(clusters)
