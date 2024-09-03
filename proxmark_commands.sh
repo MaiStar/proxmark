@@ -4,12 +4,12 @@
 #./proxmark_commands.sh
 
 # Путь к файлу для сохранения результатов
-output_file=~/Музыка/output.txt
+output_file=~/Python/proxmark/output.txt
 
 # Очищаем содержимое файла перед началом
 > $output_file
 
-# Очищаем карту началом
+# Очищаем карту перед началом
 ./pm3 -c "hf mf wrbl --blk 8 -k 59D7FD628402 -d 00000000000000000000000000000000"
 
 # Цикл от 200 до 2000 с шагом 50
@@ -22,7 +22,7 @@ for delay in $(seq 200 50 2000); do
   echo "$current_time" >> $output_file
   
   # Выполняем команду и записываем результат 40 раз
-  for i in {1..40}; do
+  for i in {1..5}; do
     # Выполняем команду hw tearoff с текущей задержкой
     ./pm3 -c "hw tearoff --delay $delay --on"
     
@@ -31,6 +31,9 @@ for delay in $(seq 200 50 2000); do
     
     # Выполняем команду hf mf rdsc и фильтруем нужную строку
     result=$(./pm3 -c "hf mf rdsc -s 2 -k 59D7FD628402" | grep "  8 |")
+    
+    # Очищаем карту ещё раз
+    ./pm3 -c "hf mf wrbl --blk 8 -k 59D7FD628402 -d 00000000000000000000000000000000"
     
     # Записываем результат в файл
     echo "$result" >> $output_file
