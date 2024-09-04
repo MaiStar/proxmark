@@ -41,9 +41,18 @@ for filename in os.listdir(folder_path):
 # Подсчет общего количества всех записей
 total_all = total_good + total_no_record + total_trash + total_fail
 
+# Подсчет прошли и не прошли тест
+passed_test = total_good + total_no_record
+failed_test = total_trash + total_fail
+
 # Вывод итогов в терминал
 print(f"Все файлы \\ все кластеры:")
 print(f"  хорошая: {total_good} ({total_good/total_all*100:.2f}%)")
 print(f"  нет записи: {total_no_record} ({total_no_record/total_all*100:.2f}%)")
 print(f"  мусор: {total_trash} ({total_trash/total_all*100:.2f}%)")
 print(f"  не получилось: {total_fail} ({total_fail/total_all*100:.2f}%)")
+
+# Вывод прошли/не прошли тест
+print(f"\nРезультаты теста:")
+print(f"  прошли тест: {passed_test} ({passed_test/total_all*100:.2f}%)")
+print(f"  не прошли тест: {failed_test} ({failed_test/total_all*100:.2f}%)")
