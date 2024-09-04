@@ -22,7 +22,7 @@ for delay in $(seq 200 50 2000); do
   echo "$current_time" >> $output_file
   
   # Выполняем команду и записываем результат 40 раз
-  for i in {1..5}; do
+  for i in {1..10}; do
     # Выполняем команду hw tearoff с текущей задержкой
     ./pm3 -c "hw tearoff --delay $delay --on"
     
@@ -39,3 +39,5 @@ for delay in $(seq 200 50 2000); do
     echo "$result" >> $output_file
   done
 done
+
+echo -e "\a"
