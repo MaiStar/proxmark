@@ -63,3 +63,4 @@ print(f"  не получилось: {total_fail} ({total_fail/total_all*100:.2f
 print(f"\nРезультаты теста:")
 print(f"  прошли тест: {passed_test} ({passed_test/total_all*100:.2f}%)")
 print(f"  не прошли тест: {failed_test} ({failed_test/total_all*100:.2f}%)")
+print(f"\n")
