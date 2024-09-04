@@ -1,3 +1,4 @@
 # ignore all logs
 *.txt
 *.png
+/test
