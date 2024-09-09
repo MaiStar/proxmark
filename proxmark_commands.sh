@@ -26,7 +26,7 @@ for delay in $(seq 200 50 2000); do
   # Выполняем команду и записываем результат 50 раз / ~ 37 минут
   # for i in {1..10}; do 
   # for i in {1..50}; do 
-  for i in {1..20}; do 
+  for i in {1..10}; do 
     # Выполняем команду hw tearoff с текущей задержкой
     ./pm3 -c "hw tearoff --delay $delay --on"
     
