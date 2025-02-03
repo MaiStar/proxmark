@@ -2,6 +2,7 @@
 
 # Запуск
 #./proxmark_commands.sh
+# сделать файл исполняемым 
 
 # Путь к файлу для сохранения результатов
 output_file=~/Python/proxmark/output.txt
