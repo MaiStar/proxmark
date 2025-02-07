@@ -1,3 +1,6 @@
+# файлы формата results_20250207_091639_200-2000.txt
+# в папку ./test
+
 import os
 import re
 
@@ -26,12 +29,15 @@ def parse_file(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         content = file.read()
 
-        total_good += sum(int(match) for match in good_pattern.findall(content))
+        total_good += sum(int(match)
+                          for match in good_pattern.findall(content))
         total_no_record += sum(
             int(match) for match in no_record_pattern.findall(content)
         )
-        total_trash += sum(int(match) for match in trash_pattern.findall(content))
-        total_fail += sum(int(match) for match in fail_pattern.findall(content))
+        total_trash += sum(int(match)
+                           for match in trash_pattern.findall(content))
+        total_fail += sum(int(match)
+                          for match in fail_pattern.findall(content))
 
         # Подсчет общего количества кластеров
         total_clusters += content.count("Кластер")
@@ -55,7 +61,8 @@ print(f"\nВсего тестов было: {total_all}")
 # Вывод итогов в терминал
 print(f"\nВсе файлы \\ все кластеры:")
 print(f"  хорошая: {total_good} ({total_good/total_all*100:.2f}%)")
-print(f"  нет записи: {total_no_record} ({total_no_record/total_all*100:.2f}%)")
+print(
+    f"  нет записи: {total_no_record} ({total_no_record/total_all*100:.2f}%)")
 print(f"  мусор: {total_trash} ({total_trash/total_all*100:.2f}%)")
 print(f"  не получилось: {total_fail} ({total_fail/total_all*100:.2f}%)")
 

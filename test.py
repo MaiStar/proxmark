@@ -1,3 +1,7 @@
+# в корне нужен файл формата output.txt
+# выдает results_20250207_091639_200-2000.txt
+
+
 import matplotlib.pyplot as plt
 from datetime import datetime
 
@@ -36,7 +40,8 @@ def analyze_file(filename):
             if current_cluster is not None:
                 clusters[current_cluster][result] += 1
 
-    all_totals = {"хорошая": 0, "нет записи": 0, "мусор": 0, "не получилось": 0}
+    all_totals = {"хорошая": 0, "нет записи": 0,
+                  "мусор": 0, "не получилось": 0}
     for cluster in clusters.values():
         for key in all_totals:
             all_totals[key] += cluster[key]
@@ -72,7 +77,8 @@ def plot_results(clusters):
 
     plt.figure("Тест ключей", figsize=(10, 6))
     plt.barh(cluster_names, good, color="green", label="хорошая")
-    plt.barh(cluster_names, no_data, color="blue", left=good, label="нет записи")
+    plt.barh(cluster_names, no_data, color="blue",
+             left=good, label="нет записи")
     plt.barh(
         cluster_names,
         junk,

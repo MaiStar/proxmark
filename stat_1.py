@@ -1,3 +1,5 @@
+# я хз зачем оно))
+
 import os
 import re
 import statistics
@@ -10,20 +12,7 @@ cluster_pattern = re.compile(r'Кластер (\d+):')
 good_pattern = re.compile(r'хорошая:\s+(\д+)')
 no_record_pattern = re.compile(r'нет записи:\s+(\д+)')
 trash_pattern = re.compile(r'мусор:\s+(\д+)')
-fail_pattern = re.compile(r'не получилось:\s+(\д+)')
-
-# Данные для анализа
-short_range_data = {}
-full_range_data = {}
-
-# Функция для парсинга данных из файла
-def parse_file(file_path):
-    # Определение группы по имени файла
-    if '200-2000' in file_path:
-        data_dict = full_range_data
-    else:
-        data_dict = short_range_data
-    
+fail_pattern = re.compile(r'не по./test
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
         clusters = cluster_pattern.findall(content)
